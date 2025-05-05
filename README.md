@@ -1,7 +1,7 @@
 ![Alt Text](/WordPress-On-AWS.drawio.png)
-# 🖥️ Host a WordPress Website on AWS
+# 🌐 Scalable WordPress Hosting on AWS
 
-This project provides a secure, scalable, and highly available infrastructure to host a WordPress website using Amazon Web Services (AWS). The solution is built with best practices in mind, leveraging services such as EC2, RDS, EFS, Auto Scaling, and more.
+This project demonstrates how to deploy a **highly available, scalable, and secure WordPress website** on AWS using native AWS services. It includes an architecture diagram, startup scripts, and step-by-step deployment instructions.
 
 ---
 
@@ -9,14 +9,26 @@ This project provides a secure, scalable, and highly available infrastructure to
 
 This architecture consists of:
 
-- **Amazon EC2** instances for hosting WordPress in private subnets
-- **Amazon RDS (MySQL)** with Multi-AZ for high availability
-- **Amazon EFS** for shared storage between EC2 instances
-- **Application Load Balancer (ALB)** for routing traffic
-- **Amazon Route 53** for DNS management
-- **Auto Scaling Group** for scalability
-- **Public and Private Subnets** across multiple Availability Zones
-- **IAM, NAT Gateways, and Security Groups** for secure access and traffic flow
+-  **Auto Scaling EC2 Web Servers**  
+  Automatically scales web servers with Launch Templates and custom user-data scripts that install WordPress and configure the LAMP stack.
+
+- **Amazon EFS (Elastic File System)**  
+  Shared, persistent file storage across multiple EC2 instances to support WordPress media and content sync.
+
+- **Amazon RDS (MySQL, Multi-AZ)**  
+  Highly available MySQL database backend with failover support for resilience and uptime.
+
+- **Application Load Balancer + Amazon Route 53**  
+  Efficiently routes traffic and manages DNS with SSL termination.
+
+- **VPC with Public and Private Subnets**  
+  Isolated subnets for app, database, and NAT gateway layers for enhanced security.
+
+- **EC2 Instance Connect Endpoint (EICE)**  
+  Provides secure access to private EC2 instances without public IP addresses.
+
+- **SSL with AWS Certificate Manager**  
+  Enables HTTPS with managed TLS/SSL certificates.
 
 ---
 
@@ -28,8 +40,9 @@ Before you begin, ensure the following are set up:
 
 - AWS CLI configured
 - A VPC with public/private subnets and an Internet Gateway
-- EC2 key pair
+- EC2 instance connect endpoint
 - Security groups allowing HTTP (80), HTTPS (443), and SSH (22) as needed
+- NAT Gateway in each AZ and Application Load Balancer to direct traffic to your target groups
 - EFS file system and mount targets in each AZ
 - RDS MySQL instance (Multi-AZ preferred)
 
@@ -149,6 +162,26 @@ Proceed with the web-based WordPress installation and set up your admin account.
 - ✅ EC2 instances auto-scale as expected
 - ✅ EFS is mounted and shared across instances
 - ✅ RDS failover works (if Multi-AZ enabled)
+  
+---
+
+## 📌 Use Case
+
+This project is ideal for:
+
+- Hosting a production-ready WordPress site
+- Demonstrating AWS architecture skills
+- Practicing multi-AZ, scalable web deployment
+- Gaining hands-on experience with AWS core services
+
+---
+
+## 🔐 Security Best Practices
+
+- IAM roles and scoped permissions
+- Encrypted communication via SSL/TLS
+- No public IPs for internal services
+- Subnet isolation for app, web, and data layers
 
 ---
 
