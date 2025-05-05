@@ -1,4 +1,4 @@
-![Alt Text]/WordPress-On-AWS.drawio.png
+![Alt Text](/WordPress-On-AWS.drawio.png)
 # 🖥️ Host a WordPress Website on AWS
 
 This project provides a secure, scalable, and highly available infrastructure to host a WordPress website using Amazon Web Services (AWS). The solution is built with best practices in mind, leveraging services such as EC2, RDS, EFS, Auto Scaling, and more.
